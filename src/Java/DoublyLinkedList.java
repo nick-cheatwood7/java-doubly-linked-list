@@ -59,18 +59,18 @@ public class DoublyLinkedList {
       head = newNode;
       tail = newNode;
       // This is the first node, so the previous will always be null
-      head.prev = null;
+      head.setPrevious(null);
       // This is also the last node, so the tail's next will also be null
-      tail.next = null;
+      tail.setNext(null);
     } else { // List is not empty
       // Node will be inserted on the end, so update the list's tail Node
-      tail.next = newNode;
+      tail.setNext(newNode);
       // Update the previous for the new node to point to the existing tail
-      newNode.prev = tail;
+      newNode.setPrevious(tail);
       // Overwrite the existing list tail with the new node (also update the 'next'
       // value)
       tail = newNode;
-      tail.next = null;
+      tail.setNext(null);
     }
     size++;
     // Print the result
@@ -80,24 +80,24 @@ public class DoublyLinkedList {
   // Method for adding to beginning of list
   private void addFirst(Node node) {
     // The node overwrites the head and tail of the list
-    head.prev = node;
-    node.next = head;
+    head.setPrevious(node);
+    node.setNext(head);
     // Adds to the front of the list, so no previous node and the node becomes the
     // head
-    node.prev = null;
+    node.setPrevious(null);
     head = node;
   }
 
   // Method for adding to end of list
   private void addLast(Node node) {
     // Tail next will point to the new node
-    tail.next = node;
+    tail.setNext(node);
     // Point to existing tail
-    node.prev = tail;
+    node.setPrevious(tail);
     // Overwrite tail to be the node
     tail = node;
     // Empty out tail's next
-    tail.next = null;
+    tail.setNext(null);
   }
 
   // Method for inserting node at a given position
@@ -123,18 +123,18 @@ public class DoublyLinkedList {
 
         // Loop over DLL until we reach specified position
         for (int i = 1; i < pos - 1; i++) {
-          current = current.next;
+          current = current.getNext();
         }
 
         // Temp node points to the node next to current
-        temp = current.next;
-        temp.prev = current;
+        temp = current.getNext();
+        temp.setPrevious(current);
 
         // The new Node will be inserted between current and temp
-        current.next = newNode;
-        newNode.prev = current;
-        newNode.next = temp;
-        temp.prev = newNode;
+        current.setNext(newNode);
+        newNode.setPrevious(current);
+        newNode.setNext(temp);
+        temp.setPrevious(newNode);
       }
       size++;
       // Print the result
@@ -151,21 +151,24 @@ public class DoublyLinkedList {
       // List is populated
       if (pos == 1) {
         // Remove the first node (head)
-        head = head.next;
+        head = head.getNext();
         size--;
-      } else if (pos == size) {
+      } else if (pos == size) { // TODO: Not removing last element
         // Remove the last node (tail)
-        tail = tail.prev;
+        tail = tail.getPrevious();
+        tail.setNext(null);
         size--;
       } else {
         // Remove Kth position
         Node current = head;
         for (int i = 1; i < pos; i++) {
-          current = current.next;
+          current = current.getNext();
         }
         // Delete current node
-        current.next.prev = current.prev;
-        current.prev.next = current.next;
+        current.next.prev = current.getPrevious();
+        current.prev.next = current.getNext();
+        // current.getNext().setPrevious(current.getPrevious());
+        // current.getPrevious().setNext(current.getNext());
         size--;
       }
       switch (pos) {
