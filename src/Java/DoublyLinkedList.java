@@ -2,41 +2,6 @@ package Java;
 
 public class DoublyLinkedList {
 
-  // Create Node object
-  class Node {
-    private String data;
-    private Node prev;
-    private Node next;
-
-    public Node(String data) {
-      this.data = data;
-    }
-
-    public String getData() {
-      return data;
-    }
-
-    public void setData(String data) {
-      this.data = data;
-    }
-
-    public Node getNext() {
-      return next;
-    }
-
-    public void setNext(Node next) {
-      this.next = next;
-    }
-
-    public Node getPrevious() {
-      return prev;
-    }
-
-    public void setPrevious(Node prev) {
-      this.prev = prev;
-    }
-  }
-
   // Keep track of size of list
   private int size = 0;
 
@@ -153,7 +118,7 @@ public class DoublyLinkedList {
         // Remove the first node (head)
         head = head.getNext();
         size--;
-      } else if (pos == size) { // TODO: Not removing last element
+      } else if (pos == size) {
         // Remove the last node (tail)
         tail = tail.getPrevious();
         tail.setNext(null);
@@ -165,10 +130,10 @@ public class DoublyLinkedList {
           current = current.getNext();
         }
         // Delete current node
-        current.next.prev = current.getPrevious();
-        current.prev.next = current.getNext();
-        // current.getNext().setPrevious(current.getPrevious());
-        // current.getPrevious().setNext(current.getNext());
+        // current.next.prev = current.getPrevious();
+        // current.prev.next = current.getNext();
+        current.getNext().setPrevious(current.getPrevious());
+        current.getPrevious().setNext(current.getNext());
         size--;
       }
       switch (pos) {
@@ -202,7 +167,7 @@ public class DoublyLinkedList {
       if (i >= startingPosition) {
         newList.insertNode(current.getData());
       }
-      current = current.next; // Go to next Node
+      current = current.getNext(); // Go to next Node
     }
     return newList;
   }
@@ -223,7 +188,7 @@ public class DoublyLinkedList {
         if (i == pos) {
           results = current.getData();
         }
-        current = current.next;
+        current = current.getNext();
       }
     }
     return results;
@@ -246,7 +211,7 @@ public class DoublyLinkedList {
       while (current != null) {
         // Print data on each node and increment pointer
         System.out.println(index + " ~> " + current.getData());
-        current = current.next;
+        current = current.getNext();
         index++;
       }
     }
@@ -268,9 +233,9 @@ public class DoublyLinkedList {
       int index = 1;
       while (current != null) {
         // Print data on each node and increment pointer
-        System.out.print(index + " ~> " + current.data + " | ");
+        System.out.print(index + " ~> " + current.getData() + " | ");
         Memory.printAddresses(current);
-        current = current.next;
+        current = current.getNext();
         index++;
       }
       System.out.println("List size: " + getSize());

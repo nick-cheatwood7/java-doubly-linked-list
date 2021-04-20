@@ -37,11 +37,14 @@ public class Main {
 
     System.out.println("\nEnter a position to GET: ");
     position = scan.nextInt();
-    scan.nextLine();
+    scan.nextLine(); // Consume next line (buggy, do not remove)
     data = list.getPosition(position); // Get at position
     System.out.println("Contents at position: " + data);
 
     scan.close(); // Close the input
+
+    System.out.println("\n##### Final List Details #####");
+    list.printExtendedData();
   }
 
   public static void main(String[] args) {
@@ -56,16 +59,6 @@ public class Main {
      */
 
     getUserInputs(myList);
-
-    // // Position to get
-    // System.out.println("\nEnter a position to GET: ");
-    // // Get the User's input
-    // position = input.nextInt();
-    // data = myList.getPosition(position); // Get at position
-    // System.out.println("Contents at position: " + data);
-
-    System.out.println("\n##### Final List Details #####");
-    myList.printExtendedData();
 
   }
 }
