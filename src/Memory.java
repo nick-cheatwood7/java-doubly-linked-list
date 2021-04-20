@@ -1,4 +1,3 @@
-package Java;
 
 /* Package Imports */
 import sun.misc.Unsafe;
