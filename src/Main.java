@@ -9,6 +9,9 @@ public class Main {
     int position;
     Scanner scan = new Scanner(System.in);
 
+    // NOTE: Looping causes a weird issue with scan.nextLine()...run as individual
+    // steps for now
+
     System.out.println("\nEnter a value to INSERT: ");
     data = scan.nextLine();
     list.insertNode(data); // Insert into list
