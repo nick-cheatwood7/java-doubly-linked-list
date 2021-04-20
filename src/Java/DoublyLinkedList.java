@@ -130,8 +130,6 @@ public class DoublyLinkedList {
           current = current.getNext();
         }
         // Delete current node
-        // current.next.prev = current.getPrevious();
-        // current.prev.next = current.getNext();
         current.getNext().setPrevious(current.getPrevious());
         current.getPrevious().setNext(current.getNext());
         size--;
